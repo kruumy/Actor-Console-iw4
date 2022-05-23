@@ -38,7 +38,7 @@ Actor Console for IW4 clients is an external GUI application for interacting wit
 
 
 
-For more infomation on Actor Console, visit the [wiki](wiki)
+For more infomation on Actor Console, visit the [wiki](https://github.com/kruumy/Actor-Console-iw4/wiki)
 
 ## Credit
 
