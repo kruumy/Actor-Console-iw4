@@ -9,7 +9,7 @@ namespace ActorConsole.Classes
 
         public static string GetCurrentMap()
         {
-            string mapIn = "";
+            string mapIn = "Could Not Find Current Map";
 
 
             Process[] processes = Process.GetProcesses();

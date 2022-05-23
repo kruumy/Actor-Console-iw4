@@ -24,6 +24,15 @@ namespace ActorConsole
         #region Window
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+
+            if (Classes.ProcessFuncs.IsConsoleAlreadyRunning())
+            {
+                if (MessageBox.Show("Another instance of Actor Console detected, Would You Like To Continue?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.No) == MessageBoxResult.No)
+                {
+                    Environment.Exit(0);
+                }
+            }
+
             Task.Run(CheckGameStatus);
 
             if (File.Exists("settings.ini"))
@@ -36,7 +45,7 @@ namespace ActorConsole
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
 
-            if (forceCheck || IsGameConnected())
+            if (forceCheck || Classes.ProcessFuncs.IsGameConnected())
             {
                 if (MessageBox.Show("Are you sure you want to quit?\nYou will lose all your current actor data.", "Warning", MessageBoxButton.OKCancel, MessageBoxImage.Warning, MessageBoxResult.Cancel, MessageBoxOptions.None) == MessageBoxResult.OK)
                 {
@@ -50,12 +59,13 @@ namespace ActorConsole
         }
         #endregion
         #region GameStatus
+
         private void CheckGameStatus()
         {
 
             while (true)
             {
-                if (forceCheck || IsGameConnected())
+                if (forceCheck || Classes.ProcessFuncs.IsGameConnected())
                 {
                     if (forceCheck || IsInGame())
                     {
@@ -71,6 +81,7 @@ namespace ActorConsole
                                 sendAllActorBtn.IsEnabled = true;
                                 sendAnimsBtn.IsEnabled = true;
                                 sendWeaponsBtn.IsEnabled = true;
+                                removeWeaponsBtn.IsEnabled = true;
                                 sendModelsBtn.IsEnabled = true;
                                 backActorBtn.IsEnabled = true;
                                 autosendCheck.IsEnabled = true;
@@ -84,7 +95,7 @@ namespace ActorConsole
                     }
                     else
                     {
-                        if (forceCheck || IsGameConnected())
+                        if (forceCheck || Classes.ProcessFuncs.IsGameConnected())
                         {
                             Dispatcher.Invoke(() =>
                             {
@@ -113,27 +124,6 @@ namespace ActorConsole
                 System.Threading.Thread.Sleep(1500);
             }
         }
-        private bool IsGameConnected()
-        {
-            Process[] processesiw4x = Process.GetProcessesByName("iw4x");
-            Process[] processesiw4m = Process.GetProcessesByName("iw4m");
-            if (processesiw4m.Length == 0)
-            {
-                if (processesiw4x.Length > 0)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            else
-            {
-                return true;
-            }
-        }
-
         private bool IsInGame()
         {
             try
@@ -148,13 +138,16 @@ namespace ActorConsole
                         int ingame = m4x.ReadMemory<Int32>(0x7F0F88);
                         if (ingame == 0)
                         {
+                            process.Dispose();
                             return false;
                         }
                         else
                         {
+                            process.Dispose();
                             return true;
                         }
                     }
+                    process.Dispose();
                 }
                 return false;
             }
@@ -163,11 +156,12 @@ namespace ActorConsole
                 return false;
             }
         }
-
         private void Reset()
         {
+            OneCheck("RESET");
             totalActorNum = 0;
             SelectedGun = "NONE";
+            keyBind.Text = "";
             ComboActorNum.Items.Clear();
             deathAnimBox.Items.Clear();
             idleAnimBox.Items.Clear();
@@ -190,6 +184,7 @@ namespace ActorConsole
             sendAllActorBtn.IsEnabled = false;
             sendAnimsBtn.IsEnabled = false;
             sendWeaponsBtn.IsEnabled = false;
+            removeWeaponsBtn.IsEnabled = false;
             sendModelsBtn.IsEnabled = false;
             autosendCheck.IsEnabled = false;
             autosendCheck.IsChecked = false;
@@ -435,7 +430,7 @@ namespace ActorConsole
 
         private void AT4check_Checked(object sender, RoutedEventArgs e)
         {
-            OneCheck("AT4check");
+            OneCheck("AT4");
         }
 
         private void Thumpercheck_Checked(object sender, RoutedEventArgs e)
@@ -1445,6 +1440,16 @@ namespace ActorConsole
                         }
                         break;
                     }
+                case "RESET":
+                    {
+                        SelectedGun = "";
+
+                        foreach (System.Windows.Controls.CheckBox guncheck in gunChecks)
+                        {
+                            guncheck.IsChecked = false;
+                        }
+                        break;
+                    }
                 #endregion
                 default:
                     {
@@ -1478,6 +1483,10 @@ namespace ActorConsole
         private void SendWeapons()
         {
             Econsole.Send($"mvm_actor_weapon {ComboActorNum.Text} {ComboWeaponBone.Text} {SelectedGun}_mp");
+        }
+        private void removeWeaponsBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Econsole.Send($"mvm_actor_weapon {ComboActorNum.Text} {ComboWeaponBone.Text}");
         }
 
         #endregion
@@ -1525,11 +1534,17 @@ namespace ActorConsole
                 SendWeapons();
                 SendAnims();
                 SendModels();
+                Econsole.Send("actorback");
             }
             else
             {
                 ModernWpf.MessageBox.Show("Please Select An Actor", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void backActorBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Econsole.Send("actorback");
         }
 
         private void precacheBtn_Click(object sender, RoutedEventArgs e)
@@ -1560,15 +1575,25 @@ namespace ActorConsole
         }
         private void precacheBox_MouseRightButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            if (precacheBox.Text != "No Precache Selected" && MessageBox.Show("This will reset your selected precache. OK?", "Info", MessageBoxButton.OKCancel, MessageBoxImage.Information, MessageBoxResult.Cancel) == MessageBoxResult.OK)
+            if (precacheBox.Text != "No Precache Selected" && MessageBox.Show("This will reset the console and your selected precache. OK?", "Info", MessageBoxButton.OKCancel, MessageBoxImage.Information, MessageBoxResult.Cancel) == MessageBoxResult.OK)
             {
                 precacheBox.Text = "No Precache Selected";
                 precacheBtn.Visibility = Visibility.Visible;
+                Reset();
                 if (File.Exists("settings.ini"))
                 {
                     File.Delete("settings.ini");
                 }
             }
+        }
+        private void ComboActorNum_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            OneCheck("RESET");
+            ComboWeaponBone.SelectedIndex = 0;
+            currentDeathAnimBox.Text = "";
+            currentIdleAnimBox.Text = "";
+            selectedHead.Text = "";
+            selectedBody.Text = "";
         }
         #endregion
         #region Anims Tab
@@ -1616,6 +1641,7 @@ namespace ActorConsole
                     ModernWpf.MessageBox.Show("Please Select An Actor", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
+            idleAnimBox.SelectedIndex = -1;
         }
 
         private void deathAnimBox_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -1632,6 +1658,7 @@ namespace ActorConsole
                     ModernWpf.MessageBox.Show("Please Select An Actor", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
+            deathAnimBox.SelectedIndex = -1;
         }
 
         private void spAnimBox_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -1655,6 +1682,7 @@ namespace ActorConsole
                     ModernWpf.MessageBox.Show("Please Select An Actor", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
+            spAnimBox.SelectedIndex = -1;
         }
 
         private void sendAnimsBtn_Click(object sender, RoutedEventArgs e)
@@ -1688,7 +1716,11 @@ namespace ActorConsole
             }
             if (headBox.Items.Count == 0 || bodyBox.Items.Count == 0 || mapBox.Text == "")
             {
-                mapBox.Text = Classes.MemoryFuncs.GetCurrentMap();
+                string x = Classes.MemoryFuncs.GetCurrentMap();
+                if (x != "Could Not Find Current Map")
+                {
+                    mapBox.Text = x;
+                }
                 RefreshModels();
             }
 
@@ -2322,6 +2354,7 @@ namespace ActorConsole
                     ModernWpf.MessageBox.Show("Please Select An Actor", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
+            bodyBox.SelectedIndex = -1;
         }
 
         private void headBox_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -2338,6 +2371,7 @@ namespace ActorConsole
                     ModernWpf.MessageBox.Show("Please Select An Actor", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
+            headBox.SelectedIndex = -1;
         }
         private void sendModelsBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -2381,6 +2415,7 @@ namespace ActorConsole
                     ModernWpf.MessageBox.Show("Please Select An Actor", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
+            spBox.SelectedIndex = -1;
         }
 
 
@@ -2413,6 +2448,10 @@ namespace ActorConsole
 
             allBindsList.Items.Add($"{actorNumBindBox.Text}, {keyBind.Text.ToUpper()}, {directionBindBox.Text}, {speedBind.Text}");
             Econsole.Send($"bind {keyBind.Text} \"mvm_actor_walk {actorNumBindBox.Text} {speedBind.Text} {directionBindBox.Text}\"");
+            keyBind.Text = "";
+            actorNumBindBox.Text = "";
+            speedBind.Text = "7";
+            directionBindBox.Text = "forward";
         }
 
         private void bindsItem_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
@@ -2455,10 +2494,14 @@ namespace ActorConsole
         {
             foreach (string line in cfgTextBox.Text.Split('\n'))
             {
-                if (!line.Contains("//"))
+                if (line.Trim().Contains("//") || line.Trim().Contains("mvm_actor_spawn"))
                 {
+                    Console.WriteLine("invalid line");
                     // find way to run on different thread without errors
-                    Econsole.Send(line);
+                }
+                else
+                {
+                    Econsole.Send(line.Trim());
                 }
             }
         }
@@ -2486,5 +2529,23 @@ namespace ActorConsole
             Econsole.Send(singleSendBox.Text);
         }
         #endregion
+        #region Artificial Actor Menu
+        private void CreateMenu()
+        {
+            FakeActorView m = new FakeActorView();
+            m.Show();
+
+        }
+        private void artActorMenuBtn_Click(object sender, RoutedEventArgs e)
+        {
+            CreateMenu();
+        }
+
+
+        #endregion
+
+
+
+
     }
 }
