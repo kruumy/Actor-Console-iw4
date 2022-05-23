@@ -21,11 +21,14 @@
 
 ## What Is Actor Console?
 
-Actor Console for IW4 clients is an external GUI application for interacting with the [IW4 Cinematic Mod By Sass](https://github.com/sortileges/iw4cine). It enables you to manage you actors more efficiently and provide an easy GUI based way to do so.
+Actor Console for IW4 clients is an external GUI application for interacting with the [IW4 Cinematic Mod By Sass](https://github.com/sortileges/iw4cine). It enables you to manage your actors more efficiently and provide an easy GUI based way to do so.
 
 ## Installation
 
-1. WIP
+1. Download latest version from releases.
+2. Start ActorConsole.exe
+3. Select your precache
+4. Done!
                                        
 
 ## FAQ
