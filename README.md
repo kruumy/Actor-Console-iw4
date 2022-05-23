@@ -20,6 +20,8 @@
 ## Installation
 
 1. WIP
+                                        
+Note: Right click in bottom left status bar to force connected, right click in bottom right to reset precache
 
 ## Support
 
