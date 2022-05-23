@@ -1,0 +1,175 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net6.0-windows10.0.22000.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<UseWPF>true</UseWPF>
+		<SupportedOSPlatformVersion>10.0.22000.0</SupportedOSPlatformVersion>
+		<ApplicationIcon>Resources\main.ico</ApplicationIcon>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<FileAlignment>1024</FileAlignment>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<FileAlignment>1024</FileAlignment>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <Compile Remove="Style\**" />
+	  <EmbeddedResource Remove="Style\**" />
+	  <None Remove="Style\**" />
+	  <Page Remove="Style\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Remove="FAMAS-00001.png" />
+		<None Remove="M4A1-00001.png" />
+		<None Remove="Resources\AA12-00001.png" />
+		<None Remove="Resources\ACR-00001.png" />
+		<None Remove="Resources\AK47-00001.png" />
+		<None Remove="Resources\AK74u-00001.png" />
+		<None Remove="Resources\AT4-00001.png" />
+		<None Remove="Resources\AUG-00001.png" />
+		<None Remove="Resources\Barrett50-00001.png" />
+		<None Remove="Resources\C4-00001.png" />
+		<None Remove="Resources\checker.png" />
+		<None Remove="Resources\Claymore-00001.png" />
+		<None Remove="Resources\DesertEagle-00001.png" />
+		<None Remove="Resources\DesertEagleGold-00001.png" />
+		<None Remove="Resources\Dragunov-00001.png" />
+		<None Remove="Resources\F2000-00001.png" />
+		<None Remove="Resources\FAL-00001.png" />
+		<None Remove="Resources\FAMAS-00001.png" />
+		<None Remove="Resources\FGM148-00001.png" />
+		<None Remove="Resources\FIM92-00001.png" />
+		<None Remove="Resources\Flashbang-00001.png" />
+		<None Remove="Resources\Frag-00001.png" />
+		<None Remove="Resources\G18-00001.png" />
+		<None Remove="Resources\Intervention-00001.png" />
+		<None Remove="Resources\Javelin-00001.png" />
+		<None Remove="Resources\L86LSW-00001.png" />
+		<None Remove="Resources\M1014-00001.png" />
+		<None Remove="Resources\M14EBR-00001.png" />
+		<None Remove="Resources\M16A4-00001.png" />
+		<None Remove="Resources\M1911-00001.png" />
+		<None Remove="Resources\M240-00001.png" />
+		<None Remove="Resources\M40A3-00001.png" />
+		<None Remove="Resources\M4A1-00001.png" />
+		<None Remove="Resources\M9-00001.png" />
+		<None Remove="Resources\M93R-00001.png" />
+		<None Remove="Resources\Magnum-00001.png" />
+		<None Remove="Resources\mg.png" />
+		<None Remove="Resources\MG4-00001.png" />
+		<None Remove="Resources\minion.jpg" />
+		<None Remove="Resources\MiniUzi-00001.png" />
+		<None Remove="Resources\Model1887-00001.png" />
+		<None Remove="Resources\MP5k-00001.png" />
+		<None Remove="Resources\mvm.png" />
+		<None Remove="Resources\mw2.png" />
+		<None Remove="Resources\P90-00001.png" />
+		<None Remove="Resources\Peacekeeper-00001.png" />
+		<None Remove="Resources\PP2000-00001.png" />
+		<None Remove="Resources\Ranger-00001.png" />
+		<None Remove="Resources\RiotShield-00001.png" />
+		<None Remove="Resources\RPD-00001.png" />
+		<None Remove="Resources\RPG7-00001.png" />
+		<None Remove="Resources\SCARH-00001.png" />
+		<None Remove="Resources\Semtex-00001.png" />
+		<None Remove="Resources\settings.png" />
+		<None Remove="Resources\SmokeGrenade-00001.png" />
+		<None Remove="Resources\SPAS12-00001.png" />
+		<None Remove="Resources\Stinger-00001.png" />
+		<None Remove="Resources\Striker-00001.png" />
+		<None Remove="Resources\StunGrenade-00001.png" />
+		<None Remove="Resources\TAR21-00001.png" />
+		<None Remove="Resources\Thumper-00001.png" />
+		<None Remove="Resources\TMP-00001.png" />
+		<None Remove="Resources\UMP45-00001.png" />
+		<None Remove="Resources\USP45-00001.png" />
+		<None Remove="Resources\Vector-00001.png" />
+		<None Remove="Resources\W1200-00001.png" />
+		<None Remove="Resources\WA2000-00001.png" />
+		<None Remove="SCARH-00001.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Resource Include="Resources\AK74u-00001.png" />
+		<Resource Include="Resources\DesertEagleGold-00001.png" />
+		<Resource Include="Resources\Javelin-00001.png" />
+		<Resource Include="Resources\main.ico" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Resource Include="Resources\AA12-00001.png" />
+		<Resource Include="Resources\ACR-00001.png" />
+		<Resource Include="Resources\AK47-00001.png" />
+		<Resource Include="Resources\AT4-00001.png" />
+		<Resource Include="Resources\AUG-00001.png" />
+		<Resource Include="Resources\Barrett50-00001.png" />
+		<Resource Include="Resources\C4-00001.png" />
+		<Resource Include="Resources\checker.png" />
+		<Resource Include="Resources\Claymore-00001.png" />
+		<Resource Include="Resources\DesertEagle-00001.png" />
+		<Resource Include="Resources\Dragunov-00001.png" />
+		<Resource Include="Resources\F2000-00001.png" />
+		<Resource Include="Resources\FAL-00001.png" />
+		<Resource Include="Resources\FAMAS-00001.png" />
+		<Resource Include="Resources\FGM148-00001.png" />
+		<Resource Include="Resources\FIM92-00001.png" />
+		<Resource Include="Resources\Flashbang-00001.png" />
+		<Resource Include="Resources\Frag-00001.png" />
+		<Resource Include="Resources\G18-00001.png" />
+		<Resource Include="Resources\Intervention-00001.png" />
+		<Resource Include="Resources\L86LSW-00001.png" />
+		<Resource Include="Resources\M1014-00001.png" />
+		<Resource Include="Resources\M14EBR-00001.png" />
+		<Resource Include="Resources\M16A4-00001.png" />
+		<Resource Include="Resources\M1911-00001.png" />
+		<Resource Include="Resources\M240-00001.png" />
+		<Resource Include="Resources\M40A3-00001.png" />
+		<Resource Include="Resources\M4A1-00001.png" />
+		<Resource Include="Resources\M9-00001.png" />
+		<Resource Include="Resources\M93R-00001.png" />
+		<Resource Include="Resources\Magnum-00001.png" />
+		<Resource Include="Resources\mg.png" />
+		<Resource Include="Resources\MG4-00001.png" />
+		<Resource Include="Resources\minion.jpg" />
+		<Resource Include="Resources\MiniUzi-00001.png" />
+		<Resource Include="Resources\Model1887-00001.png" />
+		<Resource Include="Resources\MP5k-00001.png" />
+		<Resource Include="Resources\mvm.png" />
+		<Resource Include="Resources\mw2.png" />
+		<Resource Include="Resources\P90-00001.png" />
+		<Resource Include="Resources\Peacekeeper-00001.png" />
+		<Resource Include="Resources\PP2000-00001.png" />
+		<Resource Include="Resources\Ranger-00001.png" />
+		<Resource Include="Resources\RiotShield-00001.png" />
+		<Resource Include="Resources\RPD-00001.png" />
+		<Resource Include="Resources\RPG7-00001.png" />
+		<Resource Include="Resources\SCARH-00001.png" />
+		<Resource Include="Resources\Semtex-00001.png" />
+		<Resource Include="Resources\settings.png" />
+		<Resource Include="Resources\SmokeGrenade-00001.png" />
+		<Resource Include="Resources\SPAS12-00001.png" />
+		<Resource Include="Resources\Stinger-00001.png" />
+		<Resource Include="Resources\Striker-00001.png" />
+		<Resource Include="Resources\StunGrenade-00001.png" />
+		<Resource Include="Resources\TAR21-00001.png" />
+		<Resource Include="Resources\Thumper-00001.png" />
+		<Resource Include="Resources\TMP-00001.png" />
+		<Resource Include="Resources\UMP45-00001.png" />
+		<Resource Include="Resources\USP45-00001.png" />
+		<Resource Include="Resources\Vector-00001.png" />
+		<Resource Include="Resources\W1200-00001.png" />
+		<Resource Include="Resources\WA2000-00001.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="ModernWpf.MessageBox" Version="0.5.2" />
+	  <PackageReference Include="ModernWpfUis" Version="1.4.0" />
+	</ItemGroup>
+
+</Project>

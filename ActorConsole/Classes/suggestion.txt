@@ -1,0 +1,1 @@
+it wouldve been better to have a actor class with properties for everything, but too late never did that.

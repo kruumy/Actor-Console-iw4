@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="38">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"No description"</Description>
+      <LastState RealAddress="007ED50C"/>
+      <VariableType>String</VariableType>
+      <Length>25</Length>
+      <Unicode>0</Unicode>
+      <CodePage>0</CodePage>
+      <ZeroTerminate>1</ZeroTerminate>
+      <Address>iw4m.exe+3ED50C</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"No description"</Description>
+      <LastState RealAddress="008ED760"/>
+      <VariableType>String</VariableType>
+      <Length>25</Length>
+      <Unicode>0</Unicode>
+      <CodePage>0</CodePage>
+      <ZeroTerminate>1</ZeroTerminate>
+      <Address>iw4m.exe+4ED760</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"No description"</Description>
+      <LastState RealAddress="008EDF54"/>
+      <VariableType>String</VariableType>
+      <Length>25</Length>
+      <Unicode>0</Unicode>
+      <CodePage>0</CodePage>
+      <ZeroTerminate>1</ZeroTerminate>
+      <Address>iw4m.exe+4EDF54</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"No description"</Description>
+      <LastState RealAddress="008EE054"/>
+      <VariableType>String</VariableType>
+      <Length>25</Length>
+      <Unicode>0</Unicode>
+      <CodePage>0</CodePage>
+      <ZeroTerminate>1</ZeroTerminate>
+      <Address>iw4m.exe+4EE054</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>4</ID>
+      <Description>"No description"</Description>
+      <LastState RealAddress="00A187E0"/>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>String</VariableType>
+      <Length>25</Length>
+      <Unicode>0</Unicode>
+      <CodePage>0</CodePage>
+      <ZeroTerminate>1</ZeroTerminate>
+      <Address>iw4m.exe+6187E0</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>5</ID>
+      <Description>"No description"</Description>
+      <LastState RealAddress="00A4FDC8"/>
+      <VariableType>String</VariableType>
+      <Length>25</Length>
+      <Unicode>0</Unicode>
+      <CodePage>0</CodePage>
+      <ZeroTerminate>1</ZeroTerminate>
+      <Address>iw4m.exe+64FDC8</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>6</ID>
+      <Description>"No description"</Description>
+      <LastState RealAddress="00A505C8"/>
+      <VariableType>String</VariableType>
+      <Length>25</Length>
+      <Unicode>0</Unicode>
+      <CodePage>0</CodePage>
+      <ZeroTerminate>1</ZeroTerminate>
+      <Address>iw4m.exe+6505C8</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>7</ID>
+      <Description>"No description"</Description>
+      <LastState RealAddress="00B2F818"/>
+      <VariableType>String</VariableType>
+      <Length>25</Length>
+      <Unicode>0</Unicode>
+      <CodePage>0</CodePage>
+      <ZeroTerminate>1</ZeroTerminate>
+      <Address>iw4m.exe+72F818</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>8</ID>
+      <Description>"No description"</Description>
+      <LastState RealAddress="011D3B0E"/>
+      <VariableType>String</VariableType>
+      <Length>25</Length>
+      <Unicode>0</Unicode>
+      <CodePage>0</CodePage>
+      <ZeroTerminate>1</ZeroTerminate>
+      <Address>iw4m.exe+DD3B0E</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>9</ID>
+      <Description>"No description"</Description>
+      <LastState RealAddress="011D42D8"/>
+      <VariableType>String</VariableType>
+      <Length>25</Length>
+      <Unicode>0</Unicode>
+      <CodePage>0</CodePage>
+      <ZeroTerminate>1</ZeroTerminate>
+      <Address>iw4m.exe+DD42D8</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>10</ID>
+      <Description>"No description"</Description>
+      <LastState RealAddress="014C14A4"/>
+      <VariableType>String</VariableType>
+      <Length>25</Length>
+      <Unicode>0</Unicode>
+      <CodePage>0</CodePage>
+      <ZeroTerminate>1</ZeroTerminate>
+      <Address>iw4m.exe+10C14A4</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>11</ID>
+      <Description>"No description"</Description>
+      <LastState RealAddress="01B2991D"/>
+      <VariableType>String</VariableType>
+      <Length>25</Length>
+      <Unicode>0</Unicode>
+      <CodePage>0</CodePage>
+      <ZeroTerminate>1</ZeroTerminate>
+      <Address>iw4m.exe+172991D</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>12</ID>
+      <Description>"No description"</Description>
+      <LastState RealAddress="01B29DB6"/>
+      <VariableType>String</VariableType>
+      <Length>25</Length>
+      <Unicode>0</Unicode>
+      <CodePage>0</CodePage>
+      <ZeroTerminate>1</ZeroTerminate>
+      <Address>iw4m.exe+1729DB6</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>13</ID>
+      <Description>"No description"</Description>
+      <LastState RealAddress="01CB7F9E"/>
+      <VariableType>String</VariableType>
+      <Length>25</Length>
+      <Unicode>0</Unicode>
+      <CodePage>0</CodePage>
+      <ZeroTerminate>1</ZeroTerminate>
+      <Address>iw4m.exe+18B7F9E</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>14</ID>
+      <Description>"No description"</Description>
+      <LastState RealAddress="031EB41C"/>
+      <VariableType>String</VariableType>
+      <Length>25</Length>
+      <Unicode>0</Unicode>
+      <CodePage>0</CodePage>
+      <ZeroTerminate>1</ZeroTerminate>
+      <Address>iw4m.exe+2DEB41C</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>15</ID>
+      <Description>"No description"</Description>
+      <LastState RealAddress="031EBC2C"/>
+      <VariableType>String</VariableType>
+      <Length>25</Length>
+      <Unicode>0</Unicode>
+      <CodePage>0</CodePage>
+      <ZeroTerminate>1</ZeroTerminate>
+      <Address>iw4m.exe+2DEBC2C</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>16</ID>
+      <Description>"No description"</Description>
+      <LastState RealAddress="062E27A0"/>
+      <VariableType>String</VariableType>
+      <Length>25</Length>
+      <Unicode>0</Unicode>
+      <CodePage>0</CodePage>
+      <ZeroTerminate>1</ZeroTerminate>
+      <Address>iw4m.exe+5EE27A0</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>17</ID>
+      <Description>"No description"</Description>
+      <LastState RealAddress="066C71DB"/>
+      <VariableType>String</VariableType>
+      <Length>25</Length>
+      <Unicode>0</Unicode>
+      <CodePage>0</CodePage>
+      <ZeroTerminate>1</ZeroTerminate>
+      <Address>iw4m.exe+62C71DB</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>18</ID>
+      <Description>"No description"</Description>
+      <LastState RealAddress="7B413CBC"/>
+      <VariableType>String</VariableType>
+      <Length>25</Length>
+      <Unicode>0</Unicode>
+      <CodePage>0</CodePage>
+      <ZeroTerminate>1</ZeroTerminate>
+      <Address>iw4x.dll+203CBC</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>19</ID>
+      <Description>"No description"</Description>
+      <LastState RealAddress="7B4B3584"/>
+      <VariableType>String</VariableType>
+      <Length>25</Length>
+      <Unicode>0</Unicode>
+      <CodePage>0</CodePage>
+      <ZeroTerminate>1</ZeroTerminate>
+      <Address>iw4x.dll+2A3584</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>20</ID>
+      <Description>"No description"</Description>
+      <LastState RealAddress="7B5FB25A"/>
+      <VariableType>String</VariableType>
+      <Length>25</Length>
+      <Unicode>0</Unicode>
+      <CodePage>0</CodePage>
+      <ZeroTerminate>1</ZeroTerminate>
+      <Address>iw4x.dll+3EB25A</Address>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
