@@ -2480,6 +2480,11 @@ namespace ActorConsole
 
 
         }
+
+        private void sendSingleBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Econsole.Send(singleSendBox.Text);
+        }
         #endregion
     }
 }
