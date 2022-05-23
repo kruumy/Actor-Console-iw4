@@ -543,8 +543,7 @@
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="5"></ColumnDefinition>
-                                    <ColumnDefinition Width="225"></ColumnDefinition>
-                                    <ColumnDefinition Width="225"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
                                     <ColumnDefinition Width="*"></ColumnDefinition>
                                     <ColumnDefinition Width="5"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>

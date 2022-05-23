@@ -11,11 +11,6 @@
 		<PackageIcon>main.png</PackageIcon>
 		<RepositoryUrl>https://github.com/kruumy/iw4-Actor-Console</RepositoryUrl>
 		<Copyright>Joshua Pauls 2022</Copyright>
-		<PackageProjectUrl>https://github.com/kruumy/iw4-Actor-Console</PackageProjectUrl>
-		<Authors>Joshua Pauls</Authors>
-		<PackageTags>call-of-duty</PackageTags>
-		<FileVersion>0.0.1</FileVersion>
-		<AssemblyVersion>0.0.1</AssemblyVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
