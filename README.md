@@ -35,3 +35,7 @@ Actor Console for IW4 clients is an external GUI application for interacting wit
 
 * How do I change my selected precache directory?
     * Right click on the directory in the bottom right status bar to reset.
+
+
+## Credit
+* Wip
