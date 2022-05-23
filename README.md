@@ -10,7 +10,7 @@
   <a href="https://paypal.me/JPauls281"><img src="https://img.shields.io/badge/Donate-Paypal-orange?style=flat-square"></a>
 </div>
 
-<h4 align="center">Managing IW4 Actors Easily!</a>!</h4>
+<h4 align="center">Managing IW4 Actors Made Easy!</a>!</h4>
 <h4 align="center">This is a beta release</a>!</h4>
 
 <div align="center">
@@ -18,6 +18,10 @@
     <img src="preview.png" alt="Preivew">
   </a>
 </div>
+
+## What Is Actor Console?
+
+Actor Console for IW4 clients is an external GUI application for interacting with the [IW4 Cinematic Mod By Sass](www.Google.com)
 
 ## Installation
 
