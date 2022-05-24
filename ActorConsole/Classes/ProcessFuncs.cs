@@ -76,5 +76,55 @@ namespace ActorConsole.Classes
             }
 
         }
+        public static void DisposeArray(Process[] array)
+        {
+            try
+            {
+                foreach (Process p in array)
+                {
+                    p.Dispose();
+                }
+            }
+            catch
+            {
+
+            }
+        }
+        public static uint GetGameProcId()
+        {
+            Process[] processesiw4x = Process.GetProcessesByName("iw4x");
+            Process[] processesiw4m = Process.GetProcessesByName("iw4m");
+
+            if (processesiw4x.Length > 0)
+            {
+                return (uint)processesiw4x[0].Id;
+            }
+            else if (processesiw4m.Length > 0)
+            {
+                return (uint)processesiw4m[0].Id;
+            }
+
+            DisposeArray(processesiw4x);
+            DisposeArray(processesiw4m);
+            return 0;
+        }
+        public static string GetGameProcName()
+        {
+            Process[] processesiw4x = Process.GetProcessesByName("iw4x");
+            Process[] processesiw4m = Process.GetProcessesByName("iw4m");
+
+            if (processesiw4x.Length > 0)
+            {
+                return processesiw4x[0].ProcessName;
+            }
+            else if (processesiw4m.Length > 0)
+            {
+                return processesiw4m[0].ProcessName;
+            }
+
+            DisposeArray(processesiw4x);
+            DisposeArray(processesiw4m);
+            return "";
+        }
     }
 }

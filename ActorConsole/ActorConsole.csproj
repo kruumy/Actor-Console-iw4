@@ -14,8 +14,8 @@
 		<PackageProjectUrl>https://github.com/kruumy/iw4-Actor-Console</PackageProjectUrl>
 		<Authors>Joshua Pauls</Authors>
 		<PackageTags>call-of-duty</PackageTags>
-		<FileVersion>0.0.1</FileVersion>
-		<AssemblyVersion>0.0.1</AssemblyVersion>
+		<FileVersion>1.0.0</FileVersion>
+		<AssemblyVersion>1.0.0</AssemblyVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -27,10 +27,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Compile Remove="Style\**" />
-	  <EmbeddedResource Remove="Style\**" />
-	  <None Remove="Style\**" />
-	  <Page Remove="Style\**" />
+		<Compile Remove="Style\**" />
+		<EmbeddedResource Remove="Style\**" />
+		<None Remove="Style\**" />
+		<Page Remove="Style\**" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -177,15 +177,19 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="ModernWpf.MessageBox" Version="0.5.2" />
-	  <PackageReference Include="ModernWpfUis" Version="1.4.0" />
+		<PackageReference Include="ModernWpf.MessageBox" Version="0.5.2" />
+		<PackageReference Include="ModernWpfUis" Version="1.4.0" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Update="Resources\main.png">
-	    <Pack>True</Pack>
-	    <PackagePath>\</PackagePath>
-	  </None>
+		<None Update="Resources\main.png">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Folder Include="Libs\" />
 	</ItemGroup>
 
 </Project>

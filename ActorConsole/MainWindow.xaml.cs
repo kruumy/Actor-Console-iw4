@@ -82,6 +82,7 @@ namespace ActorConsole
                                 sendAnimsBtn.IsEnabled = true;
                                 sendWeaponsBtn.IsEnabled = true;
                                 removeWeaponsBtn.IsEnabled = true;
+                                otherTab.IsEnabled = true;
                                 sendModelsBtn.IsEnabled = true;
                                 backActorBtn.IsEnabled = true;
                                 autosendCheck.IsEnabled = true;
@@ -100,6 +101,7 @@ namespace ActorConsole
                             Dispatcher.Invoke(() =>
                             {
                                 Reset();
+                                miscItem.IsEnabled = true;
                                 StatusText.Text = "Status: Connected - Not In Game";
                             });
                         }
@@ -173,6 +175,7 @@ namespace ActorConsole
             singleSendBox.Text = "";
             selectedBody.Text = "";
             mapBox.Text = "";
+            otherTab.IsEnabled = false;
             ComboWeaponBone.Text = "j_gun";
             currentIdleAnimBox.Text = "";
             currentDeathAnimBox.Text = "";
@@ -193,7 +196,10 @@ namespace ActorConsole
             miscItem.IsEnabled = false;
             bindsItem.IsEnabled = false;
             weaponsItem.IsEnabled = false;
-            mainTabs.SelectedIndex = 0;
+            if (mainTabs.SelectedIndex != 5)
+            {
+                mainTabs.SelectedIndex = 0;
+            }
         }
         private void StatusText_MouseRightButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
@@ -2423,7 +2429,7 @@ namespace ActorConsole
         #region Pathing Tab
         private void addBindBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (directionBindBox.Text == "" || actorNumBindBox.Text == "" || keyBind.Text == "" || speedBind.Text == "" || !System.Text.RegularExpressions.Regex.IsMatch(keyBind.Text, "^[a-zA-Z]"))
+            if (directionBindBox.Text == "" || actorNumBindBox.Text == "" || keyBind.Text == "" || speedBind.Text == "" || !System.Text.RegularExpressions.Regex.IsMatch(keyBind.Text, "^[a-zA-Z0-9]"))
             {
                 ModernWpf.MessageBox.Show("Please Fill In Boxes Correctly", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
@@ -2435,7 +2441,8 @@ namespace ActorConsole
                 {
                     return;
                 }
-                foreach (string j in i.ToString().Split(','))
+
+                foreach (string j in Classes.StringFuncs.RemoveLastElement<string>(i.ToString().Split(',')))
                 {
                     if (keyBind.Text.ToUpper().Trim() == j.Trim())
                     {
@@ -2466,7 +2473,7 @@ namespace ActorConsole
                 return;
             }
 
-
+            // get better way to remove bind that doenst remove number.
             try
             {
                 foreach (string i in allBindsList.SelectedItem.ToString().Split(','))
@@ -2528,6 +2535,48 @@ namespace ActorConsole
         {
             Econsole.Send(singleSendBox.Text);
         }
+
+        private void demosTab_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            try
+            {
+                demosListBox.Items.Clear();
+                //string[] playersFiles = Directory.GetFiles(Directory.GetParent(Directory.GetParent(Directory.GetParent(precacheBox.Text).FullName).FullName).FullName + "\\players\\");
+                string[] demos = Directory.GetFiles(Directory.GetParent(precacheBox.Text) + "\\demos");
+
+
+                foreach (string f in demos)
+                {
+                    if (!f.Contains(".json") && !f.Contains(".meta"))
+                    {
+                        demosListBox.Items.Add(Path.GetFileNameWithoutExtension(f));
+                    }
+                }
+            }
+            catch
+            {
+                demosListBox.Items.Add("Could Not Find Demos");
+            }
+        }
+        private void loadDemoBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Econsole.Send("r_aasamples 1");
+            Econsole.Send($"demo {selectedDemoBox.Text}");
+        }
+
+        private void demosListBox_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if ("Could Not Find Demos" == (string)demosListBox.SelectedItem)
+            {
+
+            }
+            else
+            {
+                selectedDemoBox.Text = (string)demosListBox.SelectedItem;
+            }
+            demosListBox.SelectedIndex = -1;
+        }
+
         #endregion
         #region Artificial Actor Menu
         private void CreateMenu()
@@ -2542,10 +2591,88 @@ namespace ActorConsole
         }
 
 
+
+
+
+
+
         #endregion
+        #region Advanced Pathing
+        private void advancePathTab_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            advanceActorBox.ItemsSource = ComboActorNum.Items;
+            DisableAActorBox();
+        }
+        private void DisableAActorBox()
+        {
+            advanceActorBox.ItemsSource = ComboActorNum.Items;
+            if (pointBox.Items.Count > 0)
+            {
+                advanceActorBox.IsEnabled = false;
+            }
+            else
+            {
+                advanceActorBox.IsEnabled = true;
+            }
+            if (advanceActorBox.SelectedIndex == -1)
+            {
+                pointBox.Items.Clear();
+                addPointBtn.IsEnabled = false;
+                removePointBtn.IsEnabled = false;
+                playPathbtn.IsEnabled = false;
+                speedBoxA.IsEnabled = false;
+                pointBox.IsEnabled = false;
+            }
+            else
+            {
+                addPointBtn.IsEnabled = true;
+                removePointBtn.IsEnabled = true;
+                playPathbtn.IsEnabled = true;
+                speedBoxA.IsEnabled = true;
+                pointBox.IsEnabled = true;
+            }
+        }
+        private void addPointBtn_Click(object sender, RoutedEventArgs e)
+        {
+            pointBox.Items.Add($"{advanceActorBox.Text}, {pointBox.Items.Count + 1}");
+            Econsole.Send($"mvm_actor_path_save {advanceActorBox.Text} {pointBox.Items.Count}");
+        }
 
+        private void removePointBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (pointBox.Items.Count == 0)
+            {
+                ModernWpf.MessageBox.Show("Please Add Points", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            try
+            {
+                RemoveAdvancePoint(pointBox.SelectedIndex);
+                pointBox.SelectedIndex = -1;
+            }
+            catch
+            {
 
+            }
+        }
+        private void RemoveAdvancePoint(int at)
+        {
+            do
+            {
+                Econsole.Send($"mvm_actor_path_del {advanceActorBox.Text} {pointBox.Items.Count}");
+                pointBox.Items.Remove(pointBox.Items.GetItemAt(pointBox.Items.Count - 1));
+            } while (pointBox.Items.Count > at);
+        }
 
-
+        private void playPathbtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (pointBox.Items.Count == 0)
+            {
+                ModernWpf.MessageBox.Show("Please Add Points", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            Econsole.Send($"mvm_actor_path_walk {advanceActorBox.Text} {speedBoxA.Text}");
+        }
+        #endregion
     }
 }

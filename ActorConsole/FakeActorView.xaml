@@ -20,7 +20,7 @@
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="10"></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" FontSize="11" HorizontalAlignment="Center" VerticalAlignment="Center" Panel.ZIndex="1">Warning: This is for artificially adding actors to the global list that were not created with the 'Create' button.</TextBlock>
+        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" FontSize="11" HorizontalAlignment="Center" VerticalAlignment="Center" Panel.ZIndex="1" Foreground="#FF0C0C0C">Warning: This is for artificially adding actors to the global list that were not created with the 'Create' button.</TextBlock>
         <Rectangle Fill="#FFE7E700" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4">
             <Rectangle.Effect>
                 <DropShadowEffect BlurRadius="10" ShadowDepth="1" Opacity="15"/>
