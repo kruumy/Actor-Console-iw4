@@ -5,6 +5,7 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
+using MessageBox = System.Windows.MessageBox;
 
 namespace ActorConsole
 {
@@ -49,6 +50,7 @@ namespace ActorConsole
             {
                 if (MessageBox.Show("Are you sure you want to quit?\nYou will lose all your current actor data.", "Warning", MessageBoxButton.OKCancel, MessageBoxImage.Warning, MessageBoxResult.Cancel, MessageBoxOptions.None) == MessageBoxResult.OK)
                 {
+                    Reset();
                     e.Cancel = false;
                 }
                 else
@@ -166,6 +168,7 @@ namespace ActorConsole
             keyBind.Text = "";
             advanceActorBox.SelectedIndex = -1;
             advanceActorBox.IsEnabled = false;
+            enableBoneCheck.IsChecked = false;
             ComboActorNum.Items.Clear();
             deathAnimBox.Items.Clear();
             idleAnimBox.Items.Clear();
@@ -174,6 +177,8 @@ namespace ActorConsole
             bodyBox.Items.Clear();
             spBox.Items.Clear();
             cfgTextBox.Text = "";
+            sunCheckBox.IsChecked = false;
+            EnableSunToggle();
             singleSendBox.Text = "";
             selectedBody.Text = "";
             mapBox.Text = "";
@@ -181,6 +186,9 @@ namespace ActorConsole
             ComboWeaponBone.Text = "j_gun";
             currentIdleAnimBox.Text = "";
             currentDeathAnimBox.Text = "";
+            Econsole.Send("mvm_actor_gopro off");
+            System.Threading.Thread.Sleep(50);
+            Econsole.Send("mvm_actor_gopro delete");
             createActorBtn.IsEnabled = false;
             teleportActorBtn.IsEnabled = false;
             deleteActorBtn.IsEnabled = false;
@@ -1637,62 +1645,83 @@ namespace ActorConsole
 
         private void idleAnimBox_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-
-            currentIdleAnimBox.Text = idleAnimBox.SelectedItem.ToString();
-
-            if ((bool)autosendCheck.IsChecked)
+            try
             {
-                if (ComboActorNum.Text != "")
+                currentIdleAnimBox.Text = idleAnimBox.SelectedItem.ToString();
+
+                if ((bool)autosendCheck.IsChecked)
                 {
-                    SendAnims();
+                    if (ComboActorNum.Text != "")
+                    {
+                        SendAnims();
+                    }
+                    else
+                    {
+                        ModernWpf.MessageBox.Show("Please Select An Actor", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 }
-                else
-                {
-                    ModernWpf.MessageBox.Show("Please Select An Actor", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                idleAnimBox.SelectedIndex = -1;
             }
-            idleAnimBox.SelectedIndex = -1;
+            catch
+            {
+
+            }
         }
 
         private void deathAnimBox_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            currentDeathAnimBox.Text = deathAnimBox.SelectedItem.ToString();
-            if ((bool)autosendCheck.IsChecked)
+            try
             {
-                if (ComboActorNum.Text != "")
+                currentDeathAnimBox.Text = deathAnimBox.SelectedItem.ToString();
+                if ((bool)autosendCheck.IsChecked)
                 {
-                    SendAnims();
+                    if (ComboActorNum.Text != "")
+                    {
+                        SendAnims();
+                    }
+                    else
+                    {
+                        ModernWpf.MessageBox.Show("Please Select An Actor", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 }
-                else
-                {
-                    ModernWpf.MessageBox.Show("Please Select An Actor", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                deathAnimBox.SelectedIndex = -1;
             }
-            deathAnimBox.SelectedIndex = -1;
+            catch
+            {
+
+            }
+
         }
 
         private void spAnimBox_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            if (spAnimSwitch.IsOn)
+            try
             {
-                currentIdleAnimBox.Text = spAnimBox.SelectedItem.ToString();
-            }
-            else if (!spAnimSwitch.IsOn)
-            {
-                currentDeathAnimBox.Text = spAnimBox.SelectedItem.ToString();
-            }
-            if ((bool)autosendCheck.IsChecked)
-            {
-                if (ComboActorNum.Text != "")
+                if (spAnimSwitch.IsOn)
                 {
-                    SendAnims();
+                    currentIdleAnimBox.Text = spAnimBox.SelectedItem.ToString();
                 }
-                else
+                else if (!spAnimSwitch.IsOn)
                 {
-                    ModernWpf.MessageBox.Show("Please Select An Actor", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    currentDeathAnimBox.Text = spAnimBox.SelectedItem.ToString();
                 }
+                if ((bool)autosendCheck.IsChecked)
+                {
+                    if (ComboActorNum.Text != "")
+                    {
+                        SendAnims();
+                    }
+                    else
+                    {
+                        ModernWpf.MessageBox.Show("Please Select An Actor", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+                spAnimBox.SelectedIndex = -1;
             }
-            spAnimBox.SelectedIndex = -1;
+            catch
+            {
+
+            }
         }
 
         private void sendAnimsBtn_Click(object sender, RoutedEventArgs e)
@@ -1709,6 +1738,7 @@ namespace ActorConsole
         private void SendAnims()
         {
             Econsole.Send($"mvm_actor_anim {ComboActorNum.Text} {currentIdleAnimBox.Text}");
+            System.Threading.Thread.Sleep(100);
             Econsole.Send($"mvm_actor_death {ComboActorNum.Text} {currentDeathAnimBox.Text}");
         }
         #endregion
@@ -2353,36 +2383,50 @@ namespace ActorConsole
         }
         private void bodyBox_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            selectedBody.Text = bodyBox.SelectedItem.ToString();
-            if ((bool)autosendCheck.IsChecked)
+            try
             {
-                if (ComboActorNum.Text != "")
+                selectedBody.Text = bodyBox.SelectedItem.ToString();
+                if ((bool)autosendCheck.IsChecked)
                 {
-                    SendModels();
+                    if (ComboActorNum.Text != "")
+                    {
+                        SendModels();
+                    }
+                    else
+                    {
+                        ModernWpf.MessageBox.Show("Please Select An Actor", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 }
-                else
-                {
-                    ModernWpf.MessageBox.Show("Please Select An Actor", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                bodyBox.SelectedIndex = -1;
             }
-            bodyBox.SelectedIndex = -1;
+            catch
+            {
+
+            }
         }
 
         private void headBox_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            selectedHead.Text = headBox.SelectedItem.ToString();
-            if ((bool)autosendCheck.IsChecked)
+            try
             {
-                if (ComboActorNum.Text != "")
+                selectedHead.Text = headBox.SelectedItem.ToString();
+                if ((bool)autosendCheck.IsChecked)
                 {
-                    SendModels();
+                    if (ComboActorNum.Text != "")
+                    {
+                        SendModels();
+                    }
+                    else
+                    {
+                        ModernWpf.MessageBox.Show("Please Select An Actor", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 }
-                else
-                {
-                    ModernWpf.MessageBox.Show("Please Select An Actor", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                headBox.SelectedIndex = -1;
             }
-            headBox.SelectedIndex = -1;
+            catch
+            {
+
+            }
         }
         private void sendModelsBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -2407,26 +2451,33 @@ namespace ActorConsole
 
         private void spBox_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            if (!spModelSwitch.IsOn)
+            try
             {
-                selectedBody.Text = spBox.SelectedItem.ToString();
-            }
-            else if (spModelSwitch.IsOn)
-            {
-                selectedHead.Text = spBox.SelectedItem.ToString();
-            }
-            if ((bool)autosendCheck.IsChecked)
-            {
-                if (ComboActorNum.Text != "")
+                if (!spModelSwitch.IsOn)
                 {
-                    SendModels();
+                    selectedBody.Text = spBox.SelectedItem.ToString();
                 }
-                else
+                else if (spModelSwitch.IsOn)
                 {
-                    ModernWpf.MessageBox.Show("Please Select An Actor", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    selectedHead.Text = spBox.SelectedItem.ToString();
                 }
+                if ((bool)autosendCheck.IsChecked)
+                {
+                    if (ComboActorNum.Text != "")
+                    {
+                        SendModels();
+                    }
+                    else
+                    {
+                        ModernWpf.MessageBox.Show("Please Select An Actor", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+                spBox.SelectedIndex = -1;
             }
-            spBox.SelectedIndex = -1;
+            catch
+            {
+
+            }
         }
 
 
@@ -2686,13 +2737,17 @@ namespace ActorConsole
             Econsole.Send($"mvm_actor_path_walk {advanceActorBox.Text} {speedBoxA.Text}");
         }
         #endregion
-
         #region other
         // https://www.flaticon.com/free-icon/more_6511674
-        #endregion
 
         private void enableBoneCheck_Click(object sender, RoutedEventArgs e)
         {
+            if (ComboActorNum.Text == "")
+            {
+                ModernWpf.MessageBox.Show("Please Have An Actor Selected", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                enableBoneCheck.IsChecked = false;
+                return;
+            }
             if (!(bool)enableBoneCheck.IsChecked)
             {
                 selectBoneBox.IsEnabled = false;
@@ -2704,7 +2759,10 @@ namespace ActorConsole
                 rotation3.IsEnabled = false;
                 fovSlider.IsEnabled = false;
                 Econsole.Send("mvm_actor_gopro off");
+                System.Threading.Thread.Sleep(50);
                 Econsole.Send("mvm_actor_gopro delete");
+                System.Threading.Thread.Sleep(50);
+                Econsole.Send("mvm_actor_gopro off");
             }
             else
             {
@@ -2716,15 +2774,8 @@ namespace ActorConsole
                 rotation2.IsEnabled = true;
                 fovSlider.IsEnabled = true;
                 rotation3.IsEnabled = true;
-                position1.Value = -10;
-                position2.Value = 30;
-                position3.Value = 130;
-                rotation1.Value = 100;
-                rotation2.Value = 95;
-                rotation3.Value = 120;
-                fovSlider.Value = 0.5;
-                Econsole.Send("mvm_actor_gopro delete");
                 UpdateBoneCam();
+                System.Threading.Thread.Sleep(100);
                 Econsole.Send("mvm_actor_gopro on");
             }
         }
@@ -2733,6 +2784,13 @@ namespace ActorConsole
         {
             Econsole.Send($"mvm_actor_gopro {ComboActorNum.Text} {selectBoneBox.Text} {position1.Value} {position2.Value} {position3.Value} {rotation1.Value} {rotation2.Value} {rotation3.Value}");
             Econsole.Send($"cg_fovScale {fovSlider.Value}");
+            position1Text.Text = Math.Floor(position1.Value).ToString();
+            position2Text.Text = Math.Floor(position2.Value).ToString();
+            position3Text.Text = Math.Floor(position3.Value).ToString();
+            rotation1Text.Text = Math.Floor(rotation1.Value).ToString();
+            rotation2Text.Text = Math.Floor(rotation2.Value).ToString();
+            rotation3Text.Text = Math.Floor(rotation3.Value).ToString();
+            Econsole.Send("mvm_actor_gopro on");
 
         }
 
@@ -2775,5 +2833,119 @@ namespace ActorConsole
         {
             //UpdateBoneCam();
         }
+        private void presetListBox_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            switch (presetListBox.SelectedIndex)
+            {
+                case 0:
+                    {
+                        selectBoneBox.SelectedIndex = 1;
+                        position1.Value = -10;
+                        position2.Value = 30;
+                        position3.Value = 130;
+                        rotation1.Value = 100;
+                        rotation2.Value = 95;
+                        rotation3.Value = 120;
+                        fovSlider.Value = 0.5;
+                        UpdateBoneCam();
+                        break;
+                    }
+                default:
+                    {
+
+                        break;
+                    }
+            }
+        }
+
+
+
+        private byte defaultR = 0x0;
+        private byte defaultG = 0x0;
+        private byte defaultB = 0x0;
+        private float defaultX = 0x0;
+        private float defaultY = 0x0;
+        private float defaultZ = 0x0;
+        private void sunCheckBox_Click(object sender, RoutedEventArgs e)
+        {
+            EnableSunToggle();
+        }
+        public void EnableSunToggle()
+        {
+            float[] currentSun = Classes.MemoryFuncs.GetCurrentSunSettings();
+            if ((bool)sunCheckBox.IsChecked)
+            {
+                sunColor.IsEnabled = true;
+                xPos.IsEnabled = true;
+                yPos.IsEnabled = true;
+                zPos.IsEnabled = true;
+                savePresetSun.IsEnabled = true;
+                loadPresetSun.IsEnabled = true;
+                defaultR = (byte)(currentSun[0] * 127.5);
+                defaultG = (byte)(currentSun[1] * 127.5);
+                defaultB = (byte)(currentSun[2] * 127.5);
+                defaultX = currentSun[3];
+                defaultY = currentSun[4];
+                defaultZ = currentSun[5];
+                sunColor.R = defaultR;
+                sunColor.G = defaultG;
+                sunColor.B = defaultB;
+                xPos.Value = defaultX;
+                yPos.Value = defaultY;
+                zPos.Value = defaultZ;
+
+            }
+            else
+            {
+                sunColor.R = defaultR;
+                sunColor.G = defaultG;
+                sunColor.B = defaultB;
+                xPos.Value = defaultX;
+                yPos.Value = defaultY;
+                zPos.Value = defaultZ;
+                Classes.MemoryFuncs.WriteSunColor((float)(sunColor.R / 127.5), (float)(sunColor.G / 127.5), (float)(sunColor.B / 127.5));
+                Classes.MemoryFuncs.WriteSunPosition((float)xPos.Value, (float)yPos.Value, (float)zPos.Value);
+                sunColor.IsEnabled = false;
+                xPos.IsEnabled = false;
+                yPos.IsEnabled = false;
+                zPos.IsEnabled = false;
+                savePresetSun.IsEnabled = false;
+                loadPresetSun.IsEnabled = false;
+            }
+        }
+
+        private void sunColor_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            Classes.MemoryFuncs.WriteSunColor((float)(sunColor.R / 127.5), (float)(sunColor.G / 127.5), (float)(sunColor.B / 127.5));
+        }
+
+        private void loadPresetSun_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void savePresetSun_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void zPos_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            Classes.MemoryFuncs.WriteSunPosition((float)xPos.Value, (float)yPos.Value, (float)zPos.Value);
+            zPosText.Text = Math.Round(zPos.Value, 4).ToString();
+        }
+
+        private void yPos_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            Classes.MemoryFuncs.WriteSunPosition((float)xPos.Value, (float)yPos.Value, (float)zPos.Value);
+            yPosText.Text = Math.Round(yPos.Value, 4).ToString();
+        }
+
+        private void xPos_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            Classes.MemoryFuncs.WriteSunPosition((float)xPos.Value, (float)yPos.Value, (float)zPos.Value);
+            xPosText.Text = Math.Round(xPos.Value, 4).ToString();
+        }
+        #endregion
     }
 }

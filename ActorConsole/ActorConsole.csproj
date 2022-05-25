@@ -2,20 +2,20 @@
 
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
-		<TargetFramework>net6.0-windows10.0.22000.0</TargetFramework>
-		<Nullable>enable</Nullable>
+		<TargetFramework>net48</TargetFramework>
 		<UseWPF>true</UseWPF>
 		<SupportedOSPlatformVersion>10.0.22000.0</SupportedOSPlatformVersion>
 		<ApplicationIcon>Resources\main.ico</ApplicationIcon>
 		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
 		<PackageIcon>main.png</PackageIcon>
-		<RepositoryUrl>https://github.com/kruumy/iw4-Actor-Console</RepositoryUrl>
+		<RepositoryUrl>https://github.com/kruumy/Actor-Console-iw4</RepositoryUrl>
 		<Copyright>Joshua Pauls 2022</Copyright>
-		<PackageProjectUrl>https://github.com/kruumy/iw4-Actor-Console</PackageProjectUrl>
+		<PackageProjectUrl>https://github.com/kruumy/Actor-Console-iw4</PackageProjectUrl>
 		<Authors>Joshua Pauls</Authors>
 		<PackageTags>call-of-duty</PackageTags>
 		<FileVersion>1.0.0</FileVersion>
 		<AssemblyVersion>1.0.0</AssemblyVersion>
+		<LangVersion>preview</LangVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -156,8 +156,8 @@
 		<Resource Include="Resources\M93R-00001.png" />
 		<Resource Include="Resources\Magnum-00001.png" />
 		<Resource Include="Resources\main.png">
-		  <Pack>True</Pack>
-		  <PackagePath>\</PackagePath>
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
 		</Resource>
 		<Resource Include="Resources\mg.png" />
 		<Resource Include="Resources\MG4-00001.png" />
@@ -196,12 +196,21 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Extended.Wpf.Toolkit" Version="4.3.0" />
 		<PackageReference Include="ModernWpf.MessageBox" Version="0.5.2" />
 		<PackageReference Include="ModernWpfUis" Version="1.4.0" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<Folder Include="Libs\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Reference Include="MahApps.Metro">
+	    <HintPath>..\..\..\..\.nuget\packages\mahapps.metro\2.4.9\lib\net47\MahApps.Metro.dll</HintPath>
+	  </Reference>
+	  <Reference Include="System.ComponentModel.DataAnnotations" />
+	  <Reference Include="System.Configuration" />
 	</ItemGroup>
 
 </Project>
