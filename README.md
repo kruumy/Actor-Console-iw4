@@ -25,7 +25,7 @@ Actor Console for IW4 clients is an external GUI application for interacting wit
 
 ## Installation
 
-1. Download latest version from releases.
+1. [Download](https://github.com/kruumy/Actor-Console-iw4/releases/latest) latest version from releases.
 2. Start ActorConsole.exe
 3. Select your precache
 4. Done!
@@ -40,7 +40,3 @@ Actor Console for IW4 clients is an external GUI application for interacting wit
     * It officially supports Iw4m and Iw4x! 
 
 For more information, visit the [wiki](https://github.com/kruumy/Actor-Console-iw4/wiki)
-
-
-## Credit
-* Wip
