@@ -164,6 +164,8 @@ namespace ActorConsole
             totalActorNum = 0;
             SelectedGun = "NONE";
             keyBind.Text = "";
+            advanceActorBox.SelectedIndex = -1;
+            advanceActorBox.IsEnabled = false;
             ComboActorNum.Items.Clear();
             deathAnimBox.Items.Clear();
             idleAnimBox.Items.Clear();
@@ -224,6 +226,7 @@ namespace ActorConsole
         }
         #endregion
         #region Weapons Tab
+        // https://www.flaticon.com/free-icon/gun_556206
         #region ARChecks
         private void M4A1check_Checked(object sender, RoutedEventArgs e)
         {
@@ -1603,6 +1606,7 @@ namespace ActorConsole
         }
         #endregion
         #region Anims Tab
+        // https://www.flaticon.com/premium-icon/anchor-point_5340627
         private void animsItem_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
             if (deathAnimBox.Items.Count == 0 || idleAnimBox.Items.Count == 0 || spAnimBox.Items.Count == 0)
@@ -1709,6 +1713,7 @@ namespace ActorConsole
         }
         #endregion
         #region Models Tab
+        //https://www.flaticon.com/free-icon/3d-modeling_3208383
         private void modelsItem_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
             if (spBox.Items.Count == 0)
@@ -2427,6 +2432,7 @@ namespace ActorConsole
 
         #endregion
         #region Pathing Tab
+        // https://www.flaticon.com/free-icon/walk_7458163
         private void addBindBtn_Click(object sender, RoutedEventArgs e)
         {
             if (directionBindBox.Text == "" || actorNumBindBox.Text == "" || keyBind.Text == "" || speedBind.Text == "" || !System.Text.RegularExpressions.Regex.IsMatch(keyBind.Text, "^[a-zA-Z0-9]"))
@@ -2492,6 +2498,7 @@ namespace ActorConsole
 
         #endregion
         #region Console Tab
+        // https://www.flaticon.com/free-icon/terminals_6996035
         private void miscItem_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
 
@@ -2634,6 +2641,11 @@ namespace ActorConsole
         }
         private void addPointBtn_Click(object sender, RoutedEventArgs e)
         {
+            if (pointBox.Items.Count >= 13)
+            {
+                ModernWpf.MessageBox.Show("Cannot add more than 13 points", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             pointBox.Items.Add($"{advanceActorBox.Text}, {pointBox.Items.Count + 1}");
             Econsole.Send($"mvm_actor_path_save {advanceActorBox.Text} {pointBox.Items.Count}");
         }
@@ -2674,5 +2686,94 @@ namespace ActorConsole
             Econsole.Send($"mvm_actor_path_walk {advanceActorBox.Text} {speedBoxA.Text}");
         }
         #endregion
+
+        #region other
+        // https://www.flaticon.com/free-icon/more_6511674
+        #endregion
+
+        private void enableBoneCheck_Click(object sender, RoutedEventArgs e)
+        {
+            if (!(bool)enableBoneCheck.IsChecked)
+            {
+                selectBoneBox.IsEnabled = false;
+                position1.IsEnabled = false;
+                position2.IsEnabled = false;
+                position3.IsEnabled = false;
+                rotation1.IsEnabled = false;
+                rotation2.IsEnabled = false;
+                rotation3.IsEnabled = false;
+                fovSlider.IsEnabled = false;
+                Econsole.Send("mvm_actor_gopro off");
+                Econsole.Send("mvm_actor_gopro delete");
+            }
+            else
+            {
+                selectBoneBox.IsEnabled = true;
+                position1.IsEnabled = true;
+                position2.IsEnabled = true;
+                position3.IsEnabled = true;
+                rotation1.IsEnabled = true;
+                rotation2.IsEnabled = true;
+                fovSlider.IsEnabled = true;
+                rotation3.IsEnabled = true;
+                position1.Value = -10;
+                position2.Value = 30;
+                position3.Value = 130;
+                rotation1.Value = 100;
+                rotation2.Value = 95;
+                rotation3.Value = 120;
+                fovSlider.Value = 0.5;
+                Econsole.Send("mvm_actor_gopro delete");
+                UpdateBoneCam();
+                Econsole.Send("mvm_actor_gopro on");
+            }
+        }
+
+        private void UpdateBoneCam()
+        {
+            Econsole.Send($"mvm_actor_gopro {ComboActorNum.Text} {selectBoneBox.Text} {position1.Value} {position2.Value} {position3.Value} {rotation1.Value} {rotation2.Value} {rotation3.Value}");
+            Econsole.Send($"cg_fovScale {fovSlider.Value}");
+
+        }
+
+        private void position1_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            UpdateBoneCam();
+        }
+
+        private void position2_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            UpdateBoneCam();
+        }
+
+        private void position3_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            UpdateBoneCam();
+        }
+
+        private void rotation1_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            UpdateBoneCam();
+        }
+
+        private void rotation2_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            UpdateBoneCam();
+        }
+
+        private void rotation3_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            UpdateBoneCam();
+        }
+
+        private void fovSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            //UpdateBoneCam();
+        }
+
+        private void selectBoneBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            //UpdateBoneCam();
+        }
     }
 }

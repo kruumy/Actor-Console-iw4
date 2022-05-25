@@ -14,7 +14,10 @@
                                 <ui:ColorPaletteResources
                     TargetTheme="Dark"
                     Accent="#FF3FC1EB"
-                    AltHigh="#FF242424" />
+                    AltHigh="#FF242424"
+                    BaseHigh="#FFD9D9D9"
+                    BaseMedium="#FF9A9A9A"
+                    BaseMediumHigh="#FF3FC1EB"/>
                             </ResourceDictionary.MergedDictionaries>
                         </ResourceDictionary>
                     </ui:ThemeResources.ThemeDictionaries>

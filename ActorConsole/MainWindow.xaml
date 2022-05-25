@@ -7,14 +7,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ActorConsole"
         mc:Ignorable="d"
-        Title="MW2 Actor Console" MinHeight="750" MinWidth="825" Height="750" Width="825" Loaded="Window_Loaded" Closing="Window_Closing">
+        Title="IW4 Actor Console" MinHeight="750" MinWidth="825" Height="750" Width="825" Loaded="Window_Loaded" Closing="Window_Closing">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="22*"/>
             <ColumnDefinition Width="206*"/>
         </Grid.ColumnDefinitions>
-        <TabControl x:Name="mainTabs" TabStripPlacement="Left" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2">
-            <TabItem Height="60" Header="Home">
+        <TabControl x:Name="mainTabs" TabStripPlacement="Left"  Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2">
+            <TabItem Height="60" Width="70">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="Resources/home.png" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0" />
+                    </StackPanel>
+                </TabItem.Header>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="20"></ColumnDefinition>
@@ -55,7 +60,12 @@
 
                 </Grid>
             </TabItem>
-            <TabItem x:Name="modelsItem" Height="60" Header="Models" MouseEnter="modelsItem_MouseEnter" IsEnabled="False">
+            <TabItem x:Name="modelsItem" Height="60" MouseEnter="modelsItem_MouseEnter" IsEnabled="False">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="Resources/Models.png" Width="22" Height="22" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0" />
+                    </StackPanel>
+                </TabItem.Header>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="5"></ColumnDefinition>
@@ -77,7 +87,6 @@
                     <TextBlock Grid.Row="1" Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,55,0,0">SinglePlayer Models</TextBlock>
                     <ListBox x:Name="spBox" Grid.Row="1" Grid.Column="2" d:ItemsSource="{d:SampleData ItemCount=5}" HorizontalAlignment="Stretch" Margin="5,75,5,5" MouseDoubleClick="spBox_MouseDoubleClick"></ListBox>
 
-
                     <TextBlock Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10,0,0,0" Text="Current Map" />
                     <TextBox x:Name="mapBox" Grid.Column="1" Grid.Row="1" FontSize="15" VerticalAlignment="Top" Margin="5,20,5,0" KeyUp="mapBox_KeyUp" Grid.ColumnSpan="2"/>
                     <TextBlock Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Selected Head Model" Grid.Column="1" Margin="0,0,0,130" />
@@ -95,7 +104,12 @@
 
                 </Grid>
             </TabItem>
-            <TabItem x:Name="animsItem" Height="60" Header="Anims" MouseEnter="animsItem_MouseEnter" IsEnabled="False">
+            <TabItem x:Name="animsItem" Height="60" MouseEnter="animsItem_MouseEnter" IsEnabled="False">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="Resources/anims.png" Width="22" Height="22" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0" />
+                    </StackPanel>
+                </TabItem.Header>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="5"></ColumnDefinition>
@@ -131,7 +145,12 @@
 
                 </Grid>
             </TabItem>
-            <TabItem x:Name="weaponsItem" Height="60" Header="Weapons" IsEnabled="False">
+            <TabItem x:Name="weaponsItem" Height="60" IsEnabled="False">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="Resources/gun.png" Width="22" Height="22" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0" />
+                    </StackPanel>
+                </TabItem.Header>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0"></ColumnDefinition>
@@ -459,7 +478,12 @@
 
                 </Grid>
             </TabItem>
-            <TabItem x:Name="bindsItem" Height="60" Header="Pathing" IsEnabled="False" MouseEnter="bindsItem_MouseEnter">
+            <TabItem x:Name="bindsItem" Height="60" IsEnabled="False" MouseEnter="bindsItem_MouseEnter">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="Resources/pathing.png" Width="22" Height="22" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0" />
+                    </StackPanel>
+                </TabItem.Header>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0"></ColumnDefinition>
@@ -540,7 +564,12 @@
                     </TabControl>
                 </Grid>
             </TabItem>
-            <TabItem x:Name="miscItem" Height="60" Header="Console" IsEnabled="False" MouseEnter="miscItem_MouseEnter">
+            <TabItem x:Name="miscItem" Height="60" IsEnabled="False" MouseEnter="miscItem_MouseEnter">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="Resources/console.png" Width="22" Height="22" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0" />
+                    </StackPanel>
+                </TabItem.Header>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0"></ColumnDefinition>
@@ -606,13 +635,15 @@
                         <TabItem Header="Dvar Animation">
 
                         </TabItem>
-                        <TabItem Header="Weapons">
-
-                        </TabItem>
                     </TabControl>
                 </Grid>
             </TabItem>
-            <TabItem x:Name="otherTab" Height="60" Header="Other" IsEnabled="False" >
+            <TabItem x:Name="otherTab" Height="60" IsEnabled="False" >
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="Resources/other.png" Width="22" Height="22" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0" />
+                    </StackPanel>
+                </TabItem.Header>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0"></ColumnDefinition>
@@ -626,7 +657,43 @@
                     </Grid.RowDefinitions>
                     <TabControl Grid.Row="1" Grid.Column="1">
                         <TabItem Header="Bone Cam">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="0"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="0"></RowDefinition>
+                                    <RowDefinition Height="50"></RowDefinition>
+                                    <RowDefinition Height="50"></RowDefinition>
+                                    <RowDefinition Height="0"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                    <RowDefinition Height="0"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <CheckBox x:Name="enableBoneCheck" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" Click="enableBoneCheck_Click" >Enable Bone Cam</CheckBox>
+                                <ComboBox x:Name="selectBoneBox" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="20,0,20,0" IsEnabled="False" SelectedIndex="0" SelectionChanged="selectBoneBox_SelectionChanged">
+                                    <ListBoxItem Content="j_gun"/>
+                                    <ListBoxItem Content="j_head"/>
+                                    <ListBoxItem Content="tag_weapon_right"/>
+                                    <ListBoxItem Content="tag_weapon_left"/>
+                                </ComboBox>
+                                <TextBlock Grid.Column="1" Grid.Row="4" HorizontalAlignment="Center">Position</TextBlock>
+                                <TextBlock Grid.Column="2" Grid.Row="4" HorizontalAlignment="Center">Rotation</TextBlock>
+                                <Slider x:Name="position1" Minimum="-180" Maximum="180" Grid.Column="1" Grid.Row="4" VerticalAlignment="Center" Margin="10,0,10,0" IsEnabled="False" ValueChanged="position1_ValueChanged"></Slider>
+                                <Slider x:Name="position2" Minimum="-180" Maximum="180" Grid.Column="1" Grid.Row="5" VerticalAlignment="Center" Margin="10,0,10,0" IsEnabled="False" ValueChanged="position2_ValueChanged"></Slider>
+                                <Slider x:Name="position3" Minimum="-180" Maximum="180" Grid.Column="1" Grid.Row="6" VerticalAlignment="Center" Margin="10,0,10,0" IsEnabled="False" ValueChanged="position3_ValueChanged"></Slider>
+                                <Slider x:Name="rotation1" Minimum="-180" Maximum="180" Grid.Column="2" Grid.Row="4" VerticalAlignment="Center" Margin="10,0,10,0" IsEnabled="False" ValueChanged="rotation1_ValueChanged"></Slider>
+                                <Slider x:Name="rotation2" Minimum="-180" Maximum="180" Grid.Column="2" Grid.Row="5" VerticalAlignment="Center" Margin="10,0,10,0" IsEnabled="False" ValueChanged="rotation2_ValueChanged"></Slider>
+                                <Slider x:Name="rotation3" Minimum="-180" Maximum="180" Grid.Column="2" Grid.Row="6" VerticalAlignment="Center" Margin="10,0,10,0" IsEnabled="False" ValueChanged="rotation3_ValueChanged"></Slider>
+                                <TextBlock Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="2" HorizontalAlignment="Center">FOV</TextBlock>
+                                <Slider x:Name="fovSlider" Minimum="0.2" Maximum="2" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="2" VerticalAlignment="Center" Margin="10,0,10,0" IsEnabled="False" ValueChanged="fovSlider_ValueChanged"></Slider>
 
+                            </Grid>
                         </TabItem>
                         <TabItem Header="FX">
 

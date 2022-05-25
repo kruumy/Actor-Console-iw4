@@ -40,12 +40,14 @@
 		<None Remove="Resources\ACR-00001.png" />
 		<None Remove="Resources\AK47-00001.png" />
 		<None Remove="Resources\AK74u-00001.png" />
+		<None Remove="Resources\anims.png" />
 		<None Remove="Resources\AT4-00001.png" />
 		<None Remove="Resources\AUG-00001.png" />
 		<None Remove="Resources\Barrett50-00001.png" />
 		<None Remove="Resources\C4-00001.png" />
 		<None Remove="Resources\checker.png" />
 		<None Remove="Resources\Claymore-00001.png" />
+		<None Remove="Resources\console.png" />
 		<None Remove="Resources\DesertEagle-00001.png" />
 		<None Remove="Resources\DesertEagleGold-00001.png" />
 		<None Remove="Resources\Dragunov-00001.png" />
@@ -57,6 +59,8 @@
 		<None Remove="Resources\Flashbang-00001.png" />
 		<None Remove="Resources\Frag-00001.png" />
 		<None Remove="Resources\G18-00001.png" />
+		<None Remove="Resources\gun.png" />
+		<None Remove="Resources\home.png" />
 		<None Remove="Resources\Intervention-00001.png" />
 		<None Remove="Resources\Javelin-00001.png" />
 		<None Remove="Resources\L86LSW-00001.png" />
@@ -70,15 +74,19 @@
 		<None Remove="Resources\M9-00001.png" />
 		<None Remove="Resources\M93R-00001.png" />
 		<None Remove="Resources\Magnum-00001.png" />
+		<None Remove="Resources\main.png" />
 		<None Remove="Resources\mg.png" />
 		<None Remove="Resources\MG4-00001.png" />
 		<None Remove="Resources\minion.jpg" />
 		<None Remove="Resources\MiniUzi-00001.png" />
 		<None Remove="Resources\Model1887-00001.png" />
+		<None Remove="Resources\models.png" />
 		<None Remove="Resources\MP5k-00001.png" />
 		<None Remove="Resources\mvm.png" />
 		<None Remove="Resources\mw2.png" />
+		<None Remove="Resources\other.png" />
 		<None Remove="Resources\P90-00001.png" />
+		<None Remove="Resources\pathing.png" />
 		<None Remove="Resources\Peacekeeper-00001.png" />
 		<None Remove="Resources\PP2000-00001.png" />
 		<None Remove="Resources\Ranger-00001.png" />
@@ -106,7 +114,11 @@
 
 	<ItemGroup>
 		<Resource Include="Resources\AK74u-00001.png" />
+		<Resource Include="Resources\anims.png" />
+		<Resource Include="Resources\console.png" />
 		<Resource Include="Resources\DesertEagleGold-00001.png" />
+		<Resource Include="Resources\gun.png" />
+		<Resource Include="Resources\home.png" />
 		<Resource Include="Resources\Javelin-00001.png" />
 		<Resource Include="Resources\main.ico" />
 	</ItemGroup>
@@ -143,15 +155,22 @@
 		<Resource Include="Resources\M9-00001.png" />
 		<Resource Include="Resources\M93R-00001.png" />
 		<Resource Include="Resources\Magnum-00001.png" />
+		<Resource Include="Resources\main.png">
+		  <Pack>True</Pack>
+		  <PackagePath>\</PackagePath>
+		</Resource>
 		<Resource Include="Resources\mg.png" />
 		<Resource Include="Resources\MG4-00001.png" />
 		<Resource Include="Resources\minion.jpg" />
 		<Resource Include="Resources\MiniUzi-00001.png" />
 		<Resource Include="Resources\Model1887-00001.png" />
+		<Resource Include="Resources\models.png" />
 		<Resource Include="Resources\MP5k-00001.png" />
 		<Resource Include="Resources\mvm.png" />
 		<Resource Include="Resources\mw2.png" />
+		<Resource Include="Resources\other.png" />
 		<Resource Include="Resources\P90-00001.png" />
+		<Resource Include="Resources\pathing.png" />
 		<Resource Include="Resources\Peacekeeper-00001.png" />
 		<Resource Include="Resources\PP2000-00001.png" />
 		<Resource Include="Resources\Ranger-00001.png" />
@@ -179,13 +198,6 @@
 	<ItemGroup>
 		<PackageReference Include="ModernWpf.MessageBox" Version="0.5.2" />
 		<PackageReference Include="ModernWpfUis" Version="1.4.0" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<None Update="Resources\main.png">
-			<Pack>True</Pack>
-			<PackagePath>\</PackagePath>
-		</None>
 	</ItemGroup>
 
 	<ItemGroup>
