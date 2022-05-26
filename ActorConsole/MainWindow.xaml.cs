@@ -2868,7 +2868,14 @@ namespace ActorConsole
         private float defaultZ = 0x0;
         private void sunCheckBox_Click(object sender, RoutedEventArgs e)
         {
-            EnableSunToggle();
+            try
+            {
+                EnableSunToggle();
+            }
+            catch
+            {
+
+            }
         }
         public void EnableSunToggle()
         {
@@ -2945,6 +2952,48 @@ namespace ActorConsole
         {
             Classes.MemoryFuncs.WriteSunPosition((float)xPos.Value, (float)yPos.Value, (float)zPos.Value);
             xPosText.Text = Math.Round(xPos.Value, 4).ToString();
+        }
+        #endregion
+
+        #region Dvar Animation
+
+        private void startAnimationBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (selectedDvarAnim.Text.Trim() == "")
+            {
+                ModernWpf.MessageBox.Show("Please Enter A Dvar", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (!Classes.DvarAnimation.isRunning)
+            {
+                Classes.DvarAnimation.StartAnimation(selectedDvarAnim.Text.Trim(), fromAnimBtn.Value, toAnimBtn.Value, speedAnimBtn.Value);
+                startAnimationBtn.Content = "Stop Animation";
+                dvarAnimSlider.IsEnabled = false;
+            }
+            else
+            {
+                Classes.DvarAnimation.StopAnimation();
+                startAnimationBtn.Content = "Start Animation";
+                dvarAnimSlider.IsEnabled = true;
+            }
+        }
+
+        private void dvarAnimSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (selectedDvarAnim.Text.Trim() == "")
+            {
+                ModernWpf.MessageBox.Show("Please Enter A Dvar", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            dvarAnimSlider.Minimum = fromAnimBtn.Value;
+            dvarAnimSlider.Maximum = toAnimBtn.Value;
+            Econsole.Send($"{selectedDvarAnim.Text.Trim()} {dvarAnimSlider.Value}");
+        }
+
+        private void dvarAnimSlider_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            dvarAnimSlider.Minimum = fromAnimBtn.Value;
+            dvarAnimSlider.Maximum = toAnimBtn.Value;
         }
         #endregion
     }
