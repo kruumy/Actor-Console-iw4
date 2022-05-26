@@ -4,6 +4,9 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
 
+// from some yt vid i forget
+
+
 namespace Memory.Win32
 {
     class MemoryHelper32

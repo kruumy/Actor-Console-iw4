@@ -78,7 +78,7 @@ namespace ActorConsole.Classes
 
             return stringList.ToArray();
         }
-        public static string[] GetSPModelsFromDir(string gscDir) // not done yet
+        public static string[] GetSPModelsFromDir(string gscDir)
         {
             List<string> stringList = new List<string>();
             string[] output = { "" };

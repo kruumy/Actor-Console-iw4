@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using MessageBox = System.Windows.MessageBox;
 
@@ -85,10 +86,12 @@ namespace ActorConsole
                                 sendWeaponsBtn.IsEnabled = true;
                                 removeWeaponsBtn.IsEnabled = true;
                                 otherTab.IsEnabled = true;
+                                sunControllerTab.IsEnabled = true;
                                 sendModelsBtn.IsEnabled = true;
                                 backActorBtn.IsEnabled = true;
                                 autosendCheck.IsEnabled = true;
                                 modelsItem.IsEnabled = true;
+                                demoRecording.IsEnabled = true;
                                 animsItem.IsEnabled = true;
                                 miscItem.IsEnabled = true;
                                 bindsItem.IsEnabled = true;
@@ -176,8 +179,10 @@ namespace ActorConsole
             headBox.Items.Clear();
             bodyBox.Items.Clear();
             spBox.Items.Clear();
+            demoRecording.IsEnabled = false;
+            sunControllerTab.IsEnabled = false;
             cfgTextBox.Text = "";
-            sunCheckBox.IsChecked = false;
+            sunCheckBox.IsEnabled = false;
             singleSendBox.Text = "";
             selectedBody.Text = "";
             mapBox.Text = "";
@@ -2634,6 +2639,45 @@ namespace ActorConsole
             demosListBox.SelectedIndex = -1;
         }
 
+        private void demoRecording_Click(object sender, RoutedEventArgs e)
+        {
+            if (demoRecording.Content.ToString().Contains("Stop"))
+            {
+                Econsole.Send("stoprecord");
+                demoRecording.ClearValue(Button.BackgroundProperty);
+                demoRecording.Content = "Start Recording";
+            }
+            else
+            {
+                demoNameDialog.ShowAsync();
+            }
+        }
+        private void demoNameDialog_PrimaryButtonClick(ModernWpf.Controls.ContentDialog sender, ModernWpf.Controls.ContentDialogButtonClickEventArgs args)
+        {
+            string[] demos = Directory.GetFiles(Directory.GetParent(precacheBox.Text) + "\\demos");
+            foreach (string f in demos)
+            {
+                if (demoNameBox.Text.Trim().Replace(" ", "_") == Path.GetFileNameWithoutExtension(f))
+                {
+                    demoRecording.Content = "Start Recording";
+                    ModernWpf.MessageBox.Show("Demo Name Already Exists", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+            }
+
+            demoRecording.Background = Brushes.DarkRed;
+            demoRecording.Content = "Stop Recording";
+
+            Econsole.Send("stoprecord");
+            System.Threading.Thread.Sleep(50);
+            Econsole.Send($"record {demoNameBox.Text.Trim().Replace(" ", "_")}");
+        }
+
+        private void demoNameDialog_CloseButtonClick(ModernWpf.Controls.ContentDialog sender, ModernWpf.Controls.ContentDialogButtonClickEventArgs args)
+        {
+
+        }
+
         #endregion
         #region Artificial Actor Menu
         private void CreateMenu()
@@ -2927,12 +2971,32 @@ namespace ActorConsole
 
         private void loadPresetSun_Click(object sender, RoutedEventArgs e)
         {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Sun Files (*.sun)|*.sun";
+            if (openFileDialog.ShowDialog() == true)
+            {
+                string[] lines = File.ReadAllLines(openFileDialog.FileName);
+                sunColor.R = byte.Parse(lines[0]);
+                sunColor.G = byte.Parse(lines[1]);
+                sunColor.B = byte.Parse(lines[2]);
+                xPos.Value = float.Parse(lines[3]);
+                yPos.Value = float.Parse(lines[4]);
+                zPos.Value = float.Parse(lines[5]);
+                Classes.MemoryFuncs.WriteSunColor((float)(sunColor.R / 127.5), (float)(sunColor.G / 127.5), (float)(sunColor.B / 127.5));
+                Classes.MemoryFuncs.WriteSunPosition((float)xPos.Value, (float)yPos.Value, (float)zPos.Value);
 
+            }
         }
 
         private void savePresetSun_Click(object sender, RoutedEventArgs e)
         {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Sun Files (*.sun)|*.sun";
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                File.WriteAllText(saveFileDialog.FileName, $"{sunColor.R}\n{sunColor.G}\n{sunColor.B}\n{xPos.Value}\n{yPos.Value}\n{zPos.Value}");
 
+            }
         }
 
         private void zPos_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -2953,7 +3017,6 @@ namespace ActorConsole
             xPosText.Text = Math.Round(xPos.Value, 4).ToString();
         }
         #endregion
-
         #region Dvar Animation
 
         private void startAnimationBtn_Click(object sender, RoutedEventArgs e)
@@ -2994,6 +3057,8 @@ namespace ActorConsole
             dvarAnimSlider.Minimum = fromAnimBtn.Value;
             dvarAnimSlider.Maximum = toAnimBtn.Value;
         }
+
+
         #endregion
     }
 }
