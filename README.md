@@ -17,6 +17,7 @@
   <a href="https://github.com/kruumy/Actor-Console-iw4/blob/main/preview.png">
     <img src="preview.png" alt="Preivew">
   </a>
+<h3 align="center">New Photo Soon...</h3>
 </div>
 
 ## What Is Actor Console?
