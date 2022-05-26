@@ -754,7 +754,7 @@
                                 <TextBlock x:Name="rotation3Text" Grid.Column="2" Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,35">0</TextBlock>
                                 <TextBlock Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="2" HorizontalAlignment="Center">FOV</TextBlock>
                                 <Slider x:Name="fovSlider" Minimum="0.2" Maximum="2" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="2" VerticalAlignment="Center" Margin="10,0,10,0" IsEnabled="False" ValueChanged="fovSlider_ValueChanged"></Slider>
-                                <TextBlock Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" >MW2 Bone Cam is not the greatest, you can only use it in a game as well.</TextBlock>
+                                <TextBlock Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12" >MW2 Bone Cam is not the greatest(quite buggy), you can only use it in a game as well.</TextBlock>
                                 <ListBox x:Name="presetListBox" Grid.Row="1" Grid.RowSpan="8" Grid.Column="3" Margin="10,30,10,10" MouseDoubleClick="presetListBox_MouseDoubleClick">
                                     <ListBoxItem Content="Side Head"/>
                                 </ListBox>

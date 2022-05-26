@@ -178,7 +178,6 @@ namespace ActorConsole
             spBox.Items.Clear();
             cfgTextBox.Text = "";
             sunCheckBox.IsChecked = false;
-            EnableSunToggle();
             singleSendBox.Text = "";
             selectedBody.Text = "";
             mapBox.Text = "";
