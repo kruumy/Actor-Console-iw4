@@ -92,7 +92,7 @@ namespace ActorConsole.Classes
 
             foreach (string line in output)
             {
-                if (line.Contains("PrecacheModel"))
+                if (line.Contains("PrecacheModel") && !line.Contains("//"))
                 {
                     stringList.Add(line.Substring(14).Replace(')', ' ').Replace(';', ' ').Replace('\"', ' ').Trim());
                 }

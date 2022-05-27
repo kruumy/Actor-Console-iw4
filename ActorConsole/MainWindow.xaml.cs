@@ -26,7 +26,6 @@ namespace ActorConsole
         #region Window
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-
             if (Classes.ProcessFuncs.IsConsoleAlreadyRunning())
             {
                 if (MessageBox.Show("Another instance of Actor Console detected, Would You Like To Continue?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.No) == MessageBoxResult.No)
@@ -34,6 +33,17 @@ namespace ActorConsole
                     Environment.Exit(0);
                 }
             }
+
+            if (Classes.UpdateChecker.CheckForUpdates(versionText.Text))
+            {
+                versionText.Text = $"{versionText.Text}, New Version Available!";
+            }
+            else
+            {
+                versionText.Text = $"{versionText.Text}, No Updates Available!";
+            }
+
+
 
             Task.Run(CheckGameStatus);
 
@@ -2826,7 +2836,9 @@ namespace ActorConsole
         private void UpdateBoneCam()
         {
             Econsole.Send($"mvm_actor_gopro {ComboActorNum.Text} {selectBoneBox.Text} {position1.Value} {position2.Value} {position3.Value} {rotation1.Value} {rotation2.Value} {rotation3.Value}");
+            System.Threading.Thread.Sleep(50);
             Econsole.Send($"cg_fovScale {fovSlider.Value}");
+            System.Threading.Thread.Sleep(50);
             position1Text.Text = Math.Floor(position1.Value).ToString();
             position2Text.Text = Math.Floor(position2.Value).ToString();
             position3Text.Text = Math.Floor(position3.Value).ToString();
@@ -2889,7 +2901,72 @@ namespace ActorConsole
                         rotation1.Value = 100;
                         rotation2.Value = 95;
                         rotation3.Value = 120;
-                        fovSlider.Value = 0.5;
+                        fovSlider.Value = 0.4;
+                        UpdateBoneCam();
+                        break;
+                    }
+                case 1:
+                    {
+                        selectBoneBox.SelectedIndex = 1;
+                        position1.Value = 86;
+                        position2.Value = 108;
+                        position3.Value = 0;
+                        rotation1.Value = 180;
+                        rotation2.Value = 51;
+                        rotation3.Value = 97;
+                        fovSlider.Value = 0.1;
+                        UpdateBoneCam();
+                        break;
+                    }
+                case 2:
+                    {
+                        selectBoneBox.SelectedIndex = 0;
+                        position1.Value = 114;
+                        position2.Value = 50;
+                        position3.Value = 0;
+                        rotation1.Value = 180;
+                        rotation2.Value = 20;
+                        rotation3.Value = 174;
+                        fovSlider.Value = 0.1;
+                        UpdateBoneCam();
+                        break;
+                    }
+                case 3:
+                    {
+                        selectBoneBox.SelectedIndex = 0;
+                        position1.Value = 132;
+                        position2.Value = 0;
+                        position3.Value = -2;
+                        rotation1.Value = 180;
+                        rotation2.Value = 0;
+                        rotation3.Value = 180;
+                        fovSlider.Value = 0.1;
+                        UpdateBoneCam();
+                        break;
+                    }
+                case 4:
+                    {
+                        selectBoneBox.SelectedIndex = 1;
+                        position1.Value = 132;
+                        position2.Value = 0;
+                        position3.Value = -2;
+                        rotation1.Value = 180;
+                        rotation2.Value = 0;
+                        rotation3.Value = 180;
+                        fovSlider.Value = 0.1;
+                        UpdateBoneCam();
+                        break;
+                    }
+                case 5:
+                    {
+                        selectBoneBox.SelectedIndex = 1;
+                        position1.Value = -41;
+                        position2.Value = -112;
+                        position3.Value = -2;
+                        rotation1.Value = 180;
+                        rotation2.Value = -112;
+                        rotation3.Value = -99;
+                        fovSlider.Value = 0.1;
                         UpdateBoneCam();
                         break;
                     }
