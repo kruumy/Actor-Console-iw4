@@ -5,48 +5,46 @@ namespace ActorConsole.Classes
 {
     internal static class precache
     {
+
+        // replace these all with regex to make it more flexible
         public static string[] GetMPAnimsFromDir(string gscDir)
         {
             List<string> stringList = new List<string>();
-            string[] output = { "" };
             try
             {
-                output = File.ReadAllText(gscDir).Split('"');
+                string[] output = File.ReadAllText(gscDir).Split('"');
+                foreach (string line in output)
+                {
+                    if (line.Contains("pb"))
+                    {
+                        stringList.Add(line);
+                    }
+                }
             }
             catch
             {
-            }
-
-            foreach (string line in output)
-            {
-                if (line.Contains("pb"))
-                {
-                    stringList.Add(line);
-                }
             }
             return stringList.ToArray();
         }
         public static string[] GetSPAnimsFromDir(string gscDir)
         {
             List<string> stringList = new List<string>();
-            string[] output = { "" };
             try
             {
-                output = File.ReadAllText(gscDir).Split('\n');
+                string[] output = File.ReadAllText(gscDir).Split('\n');
+                foreach (string line in output)
+                {
+                    if (line.Contains("PrecacheMPAnim") && !line.Contains("pb") && !line.Contains("//"))
+                    {
+                        string finalline = "";
+                        finalline = line.Trim().Substring(15).Replace(')', ' ').Replace('(', ' ').Replace(';', ' ').Replace('\"', ' ').Trim();
+
+                        stringList.Add(finalline);
+                    }
+                }
             }
             catch
             {
-            }
-
-            foreach (string line in output)
-            {
-                if (line.Contains("PrecacheMPAnim") && !line.Contains("pb") && !line.Contains("//"))
-                {
-                    string finalline = "";
-                    finalline = line.Substring(15).Replace(')', ' ').Replace(';', ' ').Replace('\"', ' ').Trim();
-
-                    stringList.Add(finalline);
-                }
             }
             return stringList.ToArray();
         }
@@ -81,22 +79,21 @@ namespace ActorConsole.Classes
         public static string[] GetSPModelsFromDir(string gscDir)
         {
             List<string> stringList = new List<string>();
-            string[] output = { "" };
             try
             {
-                output = File.ReadAllText(gscDir).Split('\n');
+                string[] output = File.ReadAllLines(gscDir);
+                foreach (string line in output)
+                {
+                    if (line.Contains("PrecacheModel") && !line.Contains("//"))
+                    {
+                        stringList.Add(line.Trim().Substring(14).Replace(')', ' ').Replace('(', ' ').Replace(';', ' ').Replace('\"', ' ').Trim());
+                    }
+                }
             }
             catch
             {
             }
 
-            foreach (string line in output)
-            {
-                if (line.Contains("PrecacheModel") && !line.Contains("//"))
-                {
-                    stringList.Add(line.Substring(14).Replace(')', ' ').Replace(';', ' ').Replace('\"', ' ').Trim());
-                }
-            }
             return stringList.ToArray();
         }
     }

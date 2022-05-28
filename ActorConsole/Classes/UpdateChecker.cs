@@ -1,10 +1,11 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 
 namespace ActorConsole.Classes
 {
     internal static class UpdateChecker
     {
-        public static bool CheckForUpdates(string currentVersion)
+        public static bool CheckForUpdates(string currentVersionString)
         {
             bool isUpdateAvailable = false;
             try
@@ -12,10 +13,13 @@ namespace ActorConsole.Classes
                 WebClient client = new WebClient();
 
                 string url = "https://raw.githubusercontent.com/kruumy/Actor-Console-iw4/main/version.txt";
-                string latestVersion = client.DownloadString(url);
+                string latestVersionString = client.DownloadString(url);
                 client.Dispose();
 
-                if (latestVersion != currentVersion)
+                int currentVersion = Convert.ToInt32(currentVersionString.Replace(".", "").Replace("v", "").Trim());
+                int latestVersion = Convert.ToInt32(latestVersionString.Replace(".", "").Replace("v", "").Trim());
+
+                if (latestVersion > currentVersion)
                 {
                     isUpdateAvailable = true;
                 }
@@ -24,10 +28,6 @@ namespace ActorConsole.Classes
             {
 
             }
-
-
-
-
 
             return isUpdateAvailable;
         }

@@ -17,22 +17,33 @@ namespace ActorConsole.Classes
         private static void DoWork()
         {
             isRunning = true;
-            double currentValue = from;
+            currentValue = from;
+            bool reverse = false;
 
             while (isRunning)
             {
 
                 if (currentValue >= to)
                 {
-                    currentValue = from;
+                    reverse = true;
                 }
-                else
+                else if (currentValue <= from)
+                {
+                    reverse = false;
+                }
+
+
+                if (!reverse)
                 {
                     currentValue += speed;
                 }
+                else if (reverse)
+                {
+                    currentValue -= speed;
+                }
 
                 Econsole.Send($"{dvar} {currentValue}");
-                System.Threading.Thread.Sleep(100);
+                System.Threading.Thread.Sleep(50);
             }
         }
 
