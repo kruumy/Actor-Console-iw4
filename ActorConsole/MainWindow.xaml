@@ -773,10 +773,10 @@
                             </Grid>
                         </TabItem>
                         <TabItem Header="FX">
-
+                            <Image Source="Resources/minion.jpg"></Image>
                         </TabItem>
                         <TabItem Header="Misc">
-
+                            <Image Source="Resources/minion.jpg"></Image>
                         </TabItem>
                     </TabControl>
                 </Grid>
