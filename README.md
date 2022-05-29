@@ -11,7 +11,6 @@
 </div>
 
 <h4 align="center">Managing IW4 Actors Made Easy!</h4>
-<h4 align="center">This is a beta release</h4>
 
 <div align="center">
   <a href="https://github.com/kruumy/Actor-Console-iw4/blob/main/preview.png">
