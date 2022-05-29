@@ -100,6 +100,7 @@ namespace ActorConsole
                                 sendModelsBtn.IsEnabled = true;
                                 backActorBtn.IsEnabled = true;
                                 autosendCheck.IsEnabled = true;
+                                sunCheckBox.IsEnabled = true;
                                 modelsItem.IsEnabled = true;
                                 demoRecording.IsEnabled = true;
                                 animsItem.IsEnabled = true;
@@ -183,6 +184,9 @@ namespace ActorConsole
             advanceActorBox.IsEnabled = false;
             enableBoneCheck.IsChecked = false;
             ComboActorNum.Items.Clear();
+            xPos.IsEnabled = false;
+            yPos.IsEnabled = false;
+            zPos.IsEnabled = false;
             deathAnimBox.Items.Clear();
             idleAnimBox.Items.Clear();
             spAnimBox.Items.Clear();
