@@ -13,10 +13,9 @@
 <h4 align="center">Managing IW4 Actors Made Easy!</h4>
 
 <div align="center">
-  <a href="https://github.com/kruumy/Actor-Console-iw4/blob/main/preview.png">
+  <a href="https://github.com/kruumy/Actor-Console-iw4/blob/main/preview.gif">
     <img src="preview.png" alt="Preivew">
   </a>
-<h5 align="center">New Photo Soon...</h5>
 </div>
 
 ## What Is Actor Console?
