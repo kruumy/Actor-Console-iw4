@@ -14,7 +14,7 @@
 
 <div align="center">
   <a href="https://github.com/kruumy/Actor-Console-iw4/blob/main/preview.gif">
-    <img src="preview.gif" alt="Preivew">
+    <img src="preview.gif" alt="Preivew" Width="1000" Height="auto">
   </a>
 </div>
 
