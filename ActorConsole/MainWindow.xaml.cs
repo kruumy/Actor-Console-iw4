@@ -2668,23 +2668,31 @@ namespace ActorConsole
         }
         private void demoNameDialog_PrimaryButtonClick(ModernWpf.Controls.ContentDialog sender, ModernWpf.Controls.ContentDialogButtonClickEventArgs args)
         {
-            string[] demos = Directory.GetFiles(Directory.GetParent(precacheBox.Text) + "\\demos");
-            foreach (string f in demos)
+            try
             {
-                if (demoNameBox.Text.Trim().Replace(" ", "_") == Path.GetFileNameWithoutExtension(f))
+                string[] demos = Directory.GetFiles(Directory.GetParent(precacheBox.Text) + "\\demos");
+                foreach (string f in demos)
                 {
-                    demoRecording.Content = "Start Recording";
-                    ModernWpf.MessageBox.Show("Demo Name Already Exists", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
+                    if (demoNameBox.Text.Trim().Replace(" ", "_") == Path.GetFileNameWithoutExtension(f))
+                    {
+                        demoRecording.Content = "Start Recording";
+                        ModernWpf.MessageBox.Show("Demo Name Already Exists", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
                 }
+
+                demoRecording.Background = Brushes.DarkRed;
+                demoRecording.Content = "Stop Recording";
+
+                Econsole.Send("stoprecord");
+                System.Threading.Thread.Sleep(50);
+                Econsole.Send($"record {demoNameBox.Text.Trim().Replace(" ", "_")}");
+            }
+            catch
+            {
+                ModernWpf.MessageBox.Show("Could Not Start Recording", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
-            demoRecording.Background = Brushes.DarkRed;
-            demoRecording.Content = "Stop Recording";
-
-            Econsole.Send("stoprecord");
-            System.Threading.Thread.Sleep(50);
-            Econsole.Send($"record {demoNameBox.Text.Trim().Replace(" ", "_")}");
         }
 
         private void demoNameDialog_CloseButtonClick(ModernWpf.Controls.ContentDialog sender, ModernWpf.Controls.ContentDialogButtonClickEventArgs args)

@@ -36,9 +36,21 @@ namespace ActorConsole.Classes
         }
         public static bool IsGameConnected()
         {
+            if (IsIw4xRunning() || IsIw4mRunning())
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static bool OLDIsGameConnected()
+        {
             Process[] processesiw4x = Process.GetProcessesByName("iw4x");
             Process[] processesiw4m = Process.GetProcessesByName("iw4m");
-            if (processesiw4m.Length == 0)
+            if (processesiw4m.Length <= 0)
             {
                 if (processesiw4x.Length > 0)
                 {
@@ -73,6 +85,31 @@ namespace ActorConsole.Classes
                 {
 
                 }
+            }
+
+        }
+
+        public static bool IsIw4xRunning()
+        {
+            if (Process.GetProcessesByName("iw4x").Length > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+        public static bool IsIw4mRunning()
+        {
+            if (Process.GetProcessesByName("iw4m").Length > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
 
         }

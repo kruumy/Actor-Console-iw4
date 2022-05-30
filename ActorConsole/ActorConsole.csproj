@@ -13,9 +13,10 @@
 		<PackageProjectUrl>https://github.com/kruumy/Actor-Console-iw4</PackageProjectUrl>
 		<Authors>Joshua Pauls</Authors>
 		<PackageTags>call-of-duty</PackageTags>
-		<FileVersion>1.0.0</FileVersion>
-		<AssemblyVersion>1.0.0</AssemblyVersion>
+		<FileVersion>1.0.1</FileVersion>
+		<AssemblyVersion>1.0.1</AssemblyVersion>
 		<LangVersion>preview</LangVersion>
+		<PlatformTarget>x86</PlatformTarget>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -206,11 +207,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Reference Include="MahApps.Metro">
-	    <HintPath>..\..\..\..\.nuget\packages\mahapps.metro\2.4.9\lib\net47\MahApps.Metro.dll</HintPath>
-	  </Reference>
-	  <Reference Include="System.ComponentModel.DataAnnotations" />
-	  <Reference Include="System.Configuration" />
+		<Reference Include="MahApps.Metro">
+			<HintPath>..\..\..\..\.nuget\packages\mahapps.metro\2.4.9\lib\net47\MahApps.Metro.dll</HintPath>
+		</Reference>
+		<Reference Include="System.ComponentModel.DataAnnotations" />
+		<Reference Include="System.Configuration" />
 	</ItemGroup>
 
 </Project>
