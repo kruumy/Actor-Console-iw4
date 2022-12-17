@@ -1,3 +1,6 @@
+<h3 align="center">Unmaintained and archived. Newer version at</h3>
+<h3 align="center">https://github.com/kruumy/ActorConsole-Rewritten-iw4</h3>
+
 <h1 align="center">
   <br>
   Actor Console
